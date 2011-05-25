@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'dice'
+
+USAGE = <<-EOS
+Usage:
+  dice M N
+Computes a probability of getting a value M when throwing N dice.
+EOS
+
+unless ARGV.empty?
+  begin
+    puts Dice::Client.new.probability(*ARGV).to_s('F')
+  rescue ArgumentError => e
+    puts "Incorrect arguments: #{e.message}."
+    exit false
+  end
+else
+  puts USAGE
+end
+
