@@ -1,13 +1,27 @@
+# @author Roman Zaharenkov
+
 module Dice
+
+  # Helper class for user interaction.
+  # Parses arguments and delegates calls to library classes.
   class Client
 
     attr_reader :dices_count, :value
 
+    # Gets probability of getting exact value using specified number of dices.
+    #
+    # @param [Array] args should contain value and dices count
+    #
+    # @return [BigDecimal] probability of getting exact value using specified number of dices
+    #
+    # @raise [ArgumentError] if number of argument is not equal to 2
+    # @raise [ArgumentError] if arguments is not non-negative integer numbers or it string representation
     def probability(*args)
       parse_args(*args)
       Combination.probability(@value, @dices_count)
     end
 
+    # Resets combinations cache (used to improve performance).
     def reset
       Combination.reset
     end
