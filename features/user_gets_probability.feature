@@ -9,8 +9,8 @@ Feature: user gets probability
     probability = combinations_count / total_combinations_count,
 
   where:
-    combinations_count - number of combinations which give value
-    total_combinations_count - total number of combinations for specific dices count
+    combinations_count - numbers of outcomes available when throwing specific value and number of dices
+    total_combinations_count - total numbers of outcomes available when throwing specific number of dices
 
   Scenario Outline: user gets probability
     Given initialized dice client
@@ -86,7 +86,7 @@ Feature: user gets probability
     Then mean running time should not exceed "<mean>" seconds
     And a standard deviation should not exceed "<standard_deviation>" milliseconds
 
-    Scenarios: negative arguments
+    Scenarios: basic requirements
       | value | dices | iterations | mean | standard_deviation |
       |   600 |   100 |         10 |  2.0 |                 50 |
       |  1200 |   200 |         10 |  3.5 |                 75 |
