@@ -32,6 +32,7 @@ end
 
 When /^I ask probability of getting "([^"]*)" from "([^"]*)" dices "([^"]*)" times$/ do |value, dices_count, iterations|
   @mean, @standard_deviation = Benchmark.statistic(iterations.to_i) do
+    @client.reset
     @client.probability(value, dices_count)
   end
 end

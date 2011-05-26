@@ -54,6 +54,13 @@ module Dice
         }.to raise_error(ArgumentError, /invalid value for Integer/)
       end
     end
+
+    describe "#reset" do
+      it "calls Combination.reset" do
+        Combination.should_receive(:reset)
+        client.reset
+      end
+    end
   end
 end
 

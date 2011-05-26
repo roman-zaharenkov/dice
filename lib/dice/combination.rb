@@ -29,6 +29,10 @@ module Dice
     def self.probability(value, dices_count)
       BigDecimal(count(value, dices_count).to_s) / total_count(dices_count)
     end
+
+    def self.reset
+      @@combinations = []
+    end
   end
 end
 

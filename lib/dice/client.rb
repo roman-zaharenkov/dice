@@ -8,6 +8,10 @@ module Dice
       Combination.probability(@value, @dices_count)
     end
 
+    def reset
+      Combination.reset
+    end
+
     private
 
     def parse_args(*args)
