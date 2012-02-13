@@ -7,14 +7,18 @@ module Dice
   # Performs statistic calculations of dice combinations and probability.
   class Combination
 
-    @@combinations = []
+    # Creates a new instance of Combination class
+    #
+    def initialize
+      @combinations = []
+    end
 
     # Calculates total numbers of outcomes available when throwing specific number of dices.
     #
     # @param [Fixnum] dices_count number of dices used in experiment
     #
     # @return [Fixnum, Bignum] total numbers of outcomes
-    def self.total_count(dices_count)
+    def total_count(dices_count)
       FACES_COUNT ** dices_count
     end
 
@@ -32,18 +36,19 @@ module Dice
     # @param [Fixnum] dices_count number of dices used in experiment
     #
     # @return [Fixnum, Bignum] numbers of outcomes
-    def self.count(value, dices_count)
+    #
+    def count(value, dices_count)
       return 0 if value <= 0 || dices_count <= 0
       if dices_count == 1
         return value <= FACES_COUNT ? 1 : 0
       end
-      @@combinations[dices_count] ||= []
-      unless @@combinations[dices_count][value]
-        @@combinations[dices_count][value] = count(value - 1, dices_count) +
+      @combinations[dices_count] ||= []
+      unless @combinations[dices_count][value]
+        @combinations[dices_count][value] = count(value - 1, dices_count) +
                                              count(value - 1, dices_count - 1) -
                                              count(value - FACES_COUNT - 1, dices_count - 1)
       end
-      @@combinations[dices_count][value]
+      @combinations[dices_count][value]
     end
 
     # Calculates probability of getting specific value when throwing dices.
@@ -52,13 +57,9 @@ module Dice
     # @param [Fixnum] dices_count number of dices used in experiment
     #
     # @return [BigDecimal] probability
-    def self.probability(value, dices_count)
+    #
+    def probability(value, dices_count)
       BigDecimal(count(value, dices_count).to_s) / total_count(dices_count)
-    end
-
-    # Resets combinations cache (used to improve performance).
-    def self.reset
-      @@combinations = []
     end
   end
 end

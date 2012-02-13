@@ -1,3 +1,6 @@
+require "rubygems"
+require "bundler/setup"
+
 $LOAD_PATH << File.expand_path('../../../lib', __FILE__)
 require 'dice'
 

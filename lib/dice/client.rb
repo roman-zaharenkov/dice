@@ -16,14 +16,10 @@ module Dice
     #
     # @raise [ArgumentError] if number of argument is not equal to 2
     # @raise [ArgumentError] if arguments is not non-negative integer numbers or it string representation
+    #
     def probability(*args)
       parse_args(*args)
-      Combination.probability(@value, @dices_count)
-    end
-
-    # Resets combinations cache (used to improve performance).
-    def reset
-      Combination.reset
+      Combination.new.probability(@value, @dices_count)
     end
 
     private

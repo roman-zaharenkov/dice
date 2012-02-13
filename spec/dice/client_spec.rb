@@ -17,11 +17,6 @@ module Dice
         client.dices_count.should == 2
       end
 
-      it "calls Combination.probability" do
-        Combination.should_receive(:probability).with(1, 2)
-        client.probability('1', '2')
-      end
-
       it "raises argument error for wrong number of arguments" do
         [0, 1, 3, 4].each do |number_of_arguments|
           expect {
@@ -52,13 +47,6 @@ module Dice
         expect {
           client.probability(2, 4.7)
         }.to raise_error(ArgumentError, /invalid value for Integer/)
-      end
-    end
-
-    describe "#reset" do
-      it "calls Combination.reset" do
-        Combination.should_receive(:reset)
-        client.reset
       end
     end
   end
